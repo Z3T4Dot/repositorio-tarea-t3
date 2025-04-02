@@ -1,0 +1,35 @@
+{
+    "nombre": "Tu Nombre",
+    "biografia": "¡Mira mis enlaces!",
+    "redesSociales": [
+      {
+        "nombre": "Facebook",
+        "url": "https://facebook.com/tuperfil"
+      },
+      {
+        "nombre": "Instagram",
+        "url": "https://instagram.com/tuperfil"
+      },
+      {
+        "nombre": "X",
+        "url": "https://twitter.com/tuperfil"
+      },
+      {
+        "nombre": "Github",
+        "url": "https://github.com/tuperfil"
+      }
+    ],
+    "experiencia": [
+      {
+        "nombre": "LinkedIn",
+        "url": "https://linkedin.com/in/tuperfil"
+      }
+    ],
+    "blog": [
+      {
+        "nombre": "Mi Blog Personal",
+        "url": "https://tublog.com"
+      }
+    ],
+    "autor": "2023 - Hecho por Tu Nombre"
+  }
