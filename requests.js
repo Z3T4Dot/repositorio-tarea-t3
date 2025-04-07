@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Datos por defecto
     const defaultData = {
-      nombre: "Cesar Andres Acosta Albor",
+      nombre: "Cesar Acosta",
       biografia: "¡Mira mis enlaces!",
       redesSociales: [
-        { nombre: "Facebook", url: "https://www.facebook.com/profile.php?id=100091689263553&ref=ig_profile_ac" },
-        { nombre: "Instagram", url: "https://instagram.com/cesarandres__231" },
-        { nombre: "X", url: "https://x.com/Zaskersaurio" },
-        { nombre: "Github", url: "https://github.com/Z3T4Dot/" }
+        { nombre: "Facebook", url: "https://www.facebook.com/" },
+        { nombre: "Instagram", url: "https://instagram.com/" },
+        { nombre: "X", url: "https://x.com/" },
+        { nombre: "Github", url: "https://github.com/" }
       ],
       experiencia: [
-        { nombre: "LinkedIn", url: "https://www.linkedin.com/in/c%C3%A9sar-andr%C3%A9s-acosta-albor-30525624b/" }
+        { nombre: "LinkedIn", url: "https://www.linkedin.com/in/" }
       ],
       blog: [
         { nombre: "Mi Blog Personal", url: "https://tublog.com" }
       ],
-      autor: "2025 - Hecho por Cesar Acosta"
+      autor: "2025 - Hecho por No se"
     };
   
     function updateUI(data) {
