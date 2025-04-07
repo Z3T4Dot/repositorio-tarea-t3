@@ -1,117 +1,201 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-pink.css">    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <title>Links website</title>
 <script src="https://unpkg.com/feather-icons"></script>
 
 <style>
+:root {
+  --dark-bg: #121212;
+  --darker-bg: #0a0a0a;
+  --accent-color: #ff4081;
+  --text-color: #e0e0e0;
+  --card-bg: #1e1e1e;
+  --card-hover: #2a2a2a;
+}
+
 body {
-  background: url("https://www.w3schools.com/howto/img_link_tree_template2_bg.jpg"); /* The image used for background */
+  background-color: var(--dark-bg);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
   width: 100%;
-  height: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--accent-color);
+  box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+}
+
+.name-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent-color), #ff80ab);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 50px;
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(255, 64, 129, 0.3);
+}
+
+.section-title {
+  color: var(--accent-color);
+  text-align: center;
+  margin: 25px 0 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--accent-color);
+  margin: 8px auto;
+  border-radius: 3px;
 }
 
 .links-container {
   display: flex;
   flex-direction: column;
-  jusify-content: center;
   align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.links-container a {
-  width: 80%;
-}
-
-.w3-theme-l1:hover {
-  background-color: #f279a1 !important;
-}
-
-.margin-top-2 {
-  margin-top: 32px;
-}
-
-.bottom {
-  width: 100%;
+.link-button {
+  width: 90%;
+  max-width: 400px;
+  padding: 12px 20px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
   text-align: center;
-  width: auto;
-  font-weight: bolder;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.bottom span {
-  color: #ed4d82;
+.link-button:hover {
+  background-color: var(--card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
 }
 
-.bottom svg {
-  stroke: #ed4d82;
-  fill: #ed4d82;
+.link-button i {
+  margin-right: 10px;
+  font-size: 1.2rem;
 }
 
-@media (min-width: 768px) {
-  .link {
-    width: 100%;
-  }
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  color: var(--text-color);
+  font-size: 0.9rem;
 }
-@media (min-width: 576px) {
+
+.heart {
+  color: var(--accent-color);
+  margin: 0 5px;
+}
+
+@media (max-width: 768px) {
   .container {
-    max-width: 540px;
+    padding: 15px;
+  }
+  
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .link-button {
+    width: 95%;
+    padding: 10px 15px;
   }
 }
 </style>
-  </head>
-  <body>
-    <!-- Content container -->
-    <div class="container">
-
-      <!-- Image and name container. Change to your pictue here. -->
-      <div style="text-align: center">
-        <img src="https://avatars.githubusercontent.com/u/200104083?v=4" class="w3-margin" alt="image" width="150px" height="150px" style="border-radius: 50%;">
-        <p ><span class="name w3-padding w3-pink w3-round" style="font-weight: bolder;" id="name">Hola, no se</span></p>
-        <p style="font-weight: bolder;">¡Mira mis enlaces!</p>
-      </div>
-
-      <!-- Links section 1. Replace the # inside of the "" with your links. -->
-      <h4 class="margin-top-2" style="text-align: center;">MIS REDES SOCIALES</h4>
-      <div class="links-container">
-        <a id="facebookLink" href="https://www.facebook.com/" class="w3-button w3-round-xlarge w3-theme-l1 w3-border link" target="_blank">Facebook</a>
-        <br>
-        <a id="instagramUser" href="https://instagram.com/" class="w3-button w3-round-xlarge w3-theme-l1 w3-border link" target="_blank">Instagram</a>
-        <br>
-        <a id="xUser" href="https://x.com" class="w3-button w3-round-xlarge w3-theme-l1 w3-border link" target="_blank">X</a>
-        <br>
-        <a id="githubUser" href="https://github.com" class="w3-button w3-round-xlarge w3-theme-l1 w3-border link" target="_blank">Github</a>
-      </div>
-
-      <!-- Links section 2. Replace the # inside of the "" with your links. -->
-      <h4 class="margin-top-2" style="text-align: center;">MI EXPERIENCIA</h4>
-      <div class="links-container">
-        <a id="linkedinUser" href="https://www.linkedin.com/in/" class="w3-button w3-round-xlarge w3-theme-l1 w3-border link" target="_blank">LinkedIn</a>
-      </div>
-
-      <!-- Links section 3. Replace the # inside of the "" with your links. -->
-      <h4 class="margin-top-2" style="text-align: center;">MI BLOG</h4>
-      <div class="links-container">
-        <a id="website" href="#" class="w3-button w3-round-xlarge w3-theme-l1 w3-border link" target="_blank">Cesar Andres Acosta Albor</a>
-      </div>
-
-      <!-- Bottom section 3 -->
-      <div class="bottom margin-top-2 w3-padding w3-round">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-        <span id="author" style="vertical-align: 7px;"> 2023 - Hecho por no se</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-      </div>
-
+</head>
+<body>
+  <!-- Content container -->
+  <div class="container">
+    <!-- Profile section -->
+    <div class="profile-section">
+      <img src="https://avatars.githubusercontent.com/u/200104083?v=4" class="profile-img" alt="Profile Image">
+      <div class="name-tag" id="name">Hola, soy [Tu Nombre]</div>
+      <p style="margin-top: 10px; font-weight: 500;">¡Conectemos a través de mis enlaces!</p>
     </div>
-    <script src="requests.js"></script>
-  </body>  
+
+    <!-- Social Media Links -->
+    <h3 class="section-title">MIS REDES SOCIALES</h3>
+    <div class="links-container">
+      <a id="facebookLink" href="https://www.facebook.com/" class="link-button" target="_blank">
+        <i class="fab fa-facebook-f"></i> Facebook
+      </a>
+      <a id="instagramUser" href="https://instagram.com/" class="link-button" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a id="xUser" href="https://x.com" class="link-button" target="_blank">
+        <i class="fab fa-twitter"></i> Twitter/X
+      </a>
+      <a id="githubUser" href="https://github.com" class="link-button" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+    </div>
+
+    <!-- Experience Links -->
+    <h3 class="section-title">MI EXPERIENCIA</h3>
+    <div class="links-container">
+      <a id="linkedinUser" href="https://www.linkedin.com/in/" class="link-button" target="_blank">
+        <i class="fab fa-linkedin-in"></i> LinkedIn
+      </a>
+    </div>
+
+    <!-- Blog Links -->
+    <h3 class="section-title">MI BLOG</h3>
+    <div class="links-container">
+      <a id="website" href="#" class="link-button" target="_blank">
+        <i class="fas fa-globe"></i> Visita mi Blog
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <span id="author">2023 - Hecho con pasión</span>
+    </div>
+  </div>
+
+  <script src="requests.js"></script>
+</body>  
 </html>
