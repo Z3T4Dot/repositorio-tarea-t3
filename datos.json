@@ -1,0 +1,35 @@
+{
+    "nombre": "Cesar Andres Acosta Albor",
+    "biografia": "Soy un apasionado por el desarrollo de software, me gusta todo lo que tenga que ver con el backend y bases de datos, Mira mis redes sociales!",
+    "redesSociales": [
+      {
+        "nombre": "Facebook",
+        "url": "https://www.facebook.com/profile.php?id=100091689263553&ref=ig_profile_ac"
+      },
+      {
+        "nombre": "Instagram",
+        "url": "https://instagram.com/cesarandres__231"
+      },
+      {
+        "nombre": "X",
+        "url": "https://x.com/Zaskersaurio"
+      },
+      {
+        "nombre": "Github",
+        "url": "https://github.com/Z3T4Dot"
+      }
+    ],
+    "experiencia": [
+      {
+        "nombre": "LinkedIn",
+        "url": "https://www.linkedin.com/in/c%C3%A9sar-andr%C3%A9s-acosta-albor-30525624b/"
+      }
+    ],
+    "blog": [
+      {
+        "nombre": "Mi Blog Personal",
+        "url": "https://z3t4dot.github.io/repositorio-tarea-t3/"
+      }
+    ],
+    "autor": "2025 - Hecho por Cesar Acosta"
+  }
