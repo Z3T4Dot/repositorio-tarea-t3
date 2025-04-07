@@ -21,64 +21,85 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para actualizar la UI con efectos
     function updateUI(data) {
-        // Actualizar perfil
-        const profileImg = document.querySelector('.profile-img');
-        if (profileImg) profileImg.src = data.imagenPerfil || defaultData.imagenPerfil;
-        
-        document.getElementById('name').textContent = `Hola, soy ${data.nombre || defaultData.nombre}`;
-        document.querySelector('.profile-section p').textContent = data.biografia || defaultData.biografia;
-        
-        // Actualizar redes sociales con iconos
-        updateLinksSection('redesSociales', data.redesSociales);
-        updateLinksSection('experiencia', data.experiencia);
-        updateLinksSection('blog', data.blog);
-        
-        // Actualizar footer
-        document.getElementById('author').textContent = data.autor || defaultData.autor;
-        
-        // Añadir efecto de carga suave
-        setTimeout(() => {
-            document.body.style.opacity = 1;
-        }, 200);
+        try {
+            // Actualizar perfil
+            const profileImg = document.querySelector('.profile-img');
+            const nameElement = document.getElementById('name');
+            const bioElement = document.querySelector('.profile-section p');
+            const authorElement = document.getElementById('author');
+            
+            if (profileImg) profileImg.src = data.imagenPerfil || defaultData.imagenPerfil;
+            if (nameElement) nameElement.textContent = `Hola, soy ${data.nombre || defaultData.nombre}`;
+            if (bioElement) bioElement.textContent = data.biografia || defaultData.biografia;
+            if (authorElement) authorElement.textContent = data.autor || defaultData.autor;
+            
+            // Actualizar secciones de enlaces
+            updateLinksSection('redesSociales', data.redesSociales);
+            updateLinksSection('experiencia', data.experiencia);
+            updateLinksSection('blog', data.blog);
+            
+            // Añadir efecto de carga suave
+            setTimeout(() => {
+                document.body.style.opacity = 1;
+            }, 200);
+        } catch (error) {
+            console.error('Error al actualizar la UI:', error);
+        }
     }
 
     // Función para actualizar secciones de enlaces dinámicamente
     function updateLinksSection(section, linksData) {
-        const sectionMap = {
-            'redesSociales': { container: '.links-container:nth-of-type(1)', default: defaultData.redesSociales },
-            'experiencia': { container: '.links-container:nth-of-type(2)', default: defaultData.experiencia },
-            'blog': { container: '.links-container:nth-of-type(3)', default: defaultData.blog }
-        };
-        
-        const container = document.querySelector(sectionMap[section].container);
-        if (!container) return;
-        
-        // Limpiar contenedor
-        container.innerHTML = '';
-        
-        const links = linksData || sectionMap[section].default;
-        
-        // Crear botones dinámicamente
-        links.forEach(link => {
-            const button = document.createElement('a');
-            button.className = 'link-button';
-            button.href = link.url || '#';
-            button.target = '_blank';
-            button.innerHTML = `<i class="fab fa-${link.icono || 'link'}"></i> ${link.nombre}`;
-            container.appendChild(button);
-        });
+        try {
+            const sectionMap = {
+                'redesSociales': { container: '.links-container:nth-of-type(1)', default: defaultData.redesSociales },
+                'experiencia': { container: '.links-container:nth-of-type(2)', default: defaultData.experiencia },
+                'blog': { container: '.links-container:nth-of-type(3)', default: defaultData.blog }
+            };
+            
+            const container = document.querySelector(sectionMap[section].container);
+            if (!container) {
+                console.warn(`Contenedor no encontrado para la sección: ${section}`);
+                return;
+            }
+            
+            // Limpiar contenedor
+            container.innerHTML = '';
+            
+            const links = linksData || sectionMap[section].default;
+            
+            // Crear botones dinámicamente
+            links.forEach(link => {
+                const button = document.createElement('a');
+                button.className = 'link-button';
+                button.href = link.url || '#';
+                button.target = '_blank';
+                button.innerHTML = `<i class="fab fa-${link.icono || 'link'}"></i> ${link.nombre}`;
+                container.appendChild(button);
+            });
+        } catch (error) {
+            console.error(`Error al actualizar la sección ${section}:`, error);
+        }
     }
 
     // Mostrar loader mientras se cargan los datos
     document.body.style.opacity = 0;
     document.body.style.transition = 'opacity 0.3s ease';
 
+    // Ignorar el error de Permissions-Policy (no afecta la funcionalidad)
+    if (window.console && console.log) {
+        console.log('Se puede ignorar el error de Permissions-Policy');
+    }
+
     // Intentar cargar datos.json con timeout
-    const fetchTimeout = 3000; // 3 segundos de timeout
+    const fetchTimeout = 1000; // 1 segundo de timeout
     const fetchPromise = fetch('datos.json')
         .then(response => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return response.json();
+        })
+        .catch(error => {
+            // Si hay error de CORS o el archivo no existe, usar datos por defecto
+            return Promise.reject(error);
         });
 
     // Manejar timeout para la solicitud fetch
@@ -99,14 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Inicializar iconos feather (si los usas)
             if (typeof feather !== 'undefined') {
                 feather.replace();
-            }
-            
-            // Inicializar tooltips para los iconos
-            const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-            if (tooltips.length > 0 && typeof bootstrap !== 'undefined') {
-                tooltips.forEach(tooltip => {
-                    new bootstrap.Tooltip(tooltip);
-                });
             }
         });
 });
