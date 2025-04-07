@@ -19,6 +19,28 @@ document.addEventListener('DOMContentLoaded', function() {
         autor: "2025 - Hecho con ❤ por César Acosta"
     };
 
+    // Mapeo completo de secciones con todos los parámetros necesarios
+    const sectionMap = {
+        'redesSociales': {
+            container: '.links-container:nth-of-type(1)',
+            default: defaultData.redesSociales,
+            title: 'MIS REDES SOCIALES',
+            titleSelector: 'h3.section-title:nth-of-type(1)'
+        },
+        'experiencia': {
+            container: '.links-container:nth-of-type(2)',
+            default: defaultData.experiencia,
+            title: 'MI EXPERIENCIA',
+            titleSelector: 'h3.section-title:nth-of-type(2)'
+        },
+        'blog': {
+            container: '.links-container:nth-of-type(3)',
+            default: defaultData.blog,
+            title: 'MI BLOG',
+            titleSelector: 'h3.section-title:nth-of-type(3)'
+        }
+    };
+
     // Función para actualizar la UI con efectos
     function updateUI(data) {
         try {
@@ -33,10 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (bioElement) bioElement.textContent = data.biografia || defaultData.biografia;
             if (authorElement) authorElement.textContent = data.autor || defaultData.autor;
             
-            // Actualizar secciones de enlaces
-            updateLinksSection('redesSociales', data.redesSociales);
-            updateLinksSection('experiencia', data.experiencia);
-            updateLinksSection('blog', data.blog);
+            // Actualizar todas las secciones definidas en sectionMap
+            Object.keys(sectionMap).forEach(section => {
+                updateLinksSection(section, data[section]);
+            });
             
             // Añadir efecto de carga suave
             setTimeout(() => {
@@ -47,16 +69,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Función para actualizar secciones de enlaces dinámicamente
+    // Función mejorada para actualizar secciones de enlaces
     function updateLinksSection(section, linksData) {
         try {
-            const sectionMap = {
-                'redesSociales': { container: '.links-container:nth-of-type(1)', default: defaultData.redesSociales },
-                'experiencia': { container: '.links-container:nth-of-type(2)', default: defaultData.experiencia },
-                'blog': { container: '.links-container:nth-of-type(3)', default: defaultData.blog }
-            };
+            const config = sectionMap[section];
+            if (!config) {
+                console.warn(`Configuración no encontrada para la sección: ${section}`);
+                return;
+            }
             
-            const container = document.querySelector(sectionMap[section].container);
+            // Actualizar título de la sección
+            const titleElement = document.querySelector(config.titleSelector);
+            if (titleElement) {
+                titleElement.textContent = config.title;
+            }
+            
+            const container = document.querySelector(config.container);
             if (!container) {
                 console.warn(`Contenedor no encontrado para la sección: ${section}`);
                 return;
@@ -65,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Limpiar contenedor
             container.innerHTML = '';
             
-            const links = linksData || sectionMap[section].default;
+            const links = linksData || config.default;
             
             // Crear botones dinámicamente
             links.forEach(link => {
@@ -85,24 +113,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.opacity = 0;
     document.body.style.transition = 'opacity 0.3s ease';
 
-    // Ignorar el error de Permissions-Policy (no afecta la funcionalidad)
-    if (window.console && console.log) {
-        console.log('Se puede ignorar el error de Permissions-Policy');
-    }
-
     // Intentar cargar datos.json con timeout
-    const fetchTimeout = 1000; // 1 segundo de timeout
+    const fetchTimeout = 3000;
     const fetchPromise = fetch('datos.json')
         .then(response => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return response.json();
-        })
-        .catch(error => {
-            // Si hay error de CORS o el archivo no existe, usar datos por defecto
-            return Promise.reject(error);
         });
 
-    // Manejar timeout para la solicitud fetch
     const timeoutPromise = new Promise((_, reject) => 
         setTimeout(() => reject(new Error('Tiempo de espera agotado')), fetchTimeout)
     );
@@ -117,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
             updateUI(defaultData);
         })
         .finally(() => {
-            // Inicializar iconos feather (si los usas)
             if (typeof feather !== 'undefined') {
                 feather.replace();
             }
